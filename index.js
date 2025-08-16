@@ -31,7 +31,25 @@ emailjs.send(serviceID,templateID,params)
 .catch((err) => console.log(err));
 }
 
+  window.addEventListener("load", () => {
+    document.querySelectorAll(".fade-in").forEach(el => {
+      el.classList.add("show");
+    });
+  });
 
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        entry.target.classList.remove("hidden-up");
+      } else {
+        entry.target.classList.remove("visible");
+        entry.target.classList.add("hidden-up");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll(".scroll-animate").forEach(el => observer.observe(el));
 
 
 
